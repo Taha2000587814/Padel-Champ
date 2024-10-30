@@ -18572,10 +18572,17 @@ MonoBehaviour:
   visitors: {fileID: 1322424416}
   cameraMovement: {fileID: 934572226}
   ball: {fileID: 3579686740453311092, guid: 7bb80ce60ca70b24ea2b2f89af7cd46c, type: 3}
-  player: {fileID: 0}
-  opponent: {fileID: 0}
+  player: {fileID: 4407092387854475603, guid: fd7fa2a8795cd314d8589b18bd4c1d97, type: 3}
+  opponent: {fileID: 3609163562095006498, guid: d4d4a146418288a4ab1f1579e7403645,
+    type: 3}
+  teammate: {fileID: -9097033287031353185, guid: 7e5307a83c0ce3747a9cfa949daa00a9,
+    type: 3}
+  opponent2: {fileID: 3609163562095006498, guid: dbe3743ce142aa54885f522ca66430dd,
+    type: 3}
   spawnPos: {fileID: 1393511941}
   opponentSpawnPos: {fileID: 456263090}
+  teammateSpawnPos: {fileID: 811034660}
+  opponent2SpawnPos: {fileID: 544729337}
   countDown: {fileID: 1848631613}
   scoreCamTarget: {fileID: 455494509}
   confetti:
@@ -26373,6 +26380,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 797163293}
+  - component: {fileID: 797163294}
   m_Layer: 0
   m_Name: 'Areas '
   m_TagString: Untagged
@@ -26399,6 +26407,30 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &797163294
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 797163292}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32bde637ef949614fb3b05bfbf47a078, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerArea: {fileID: 1596315718}
+  teammateArea: {fileID: 1835856300}
+  opponentArea: {fileID: 37382664}
+  opponent2Area: {fileID: 272751930}
+  playerPrefab: {fileID: 4407092387854475614, guid: fd7fa2a8795cd314d8589b18bd4c1d97,
+    type: 3}
+  teammatePrefab: {fileID: 3609163562095006497, guid: 7e5307a83c0ce3747a9cfa949daa00a9,
+    type: 3}
+  opponentPrefab: {fileID: 3609163562095006497, guid: d4d4a146418288a4ab1f1579e7403645,
+    type: 3}
+  opponent2Prefab: {fileID: 3609163562095006497, guid: dbe3743ce142aa54885f522ca66430dd,
+    type: 3}
 --- !u!1 &809148065
 GameObject:
   m_ObjectHideFlags: 0
@@ -60930,6 +60962,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerPosition: {fileID: 132125596}
   opponentPosition: {fileID: 1333694681}
+  teammatePosition: {fileID: 811034660}
+  opponent2Position: {fileID: 544729337}
   comboLabel: {fileID: 262773331}
   comboNumberLabel: {fileID: 465834598}
   swipeLabel: {fileID: 623665173}
@@ -61534,7 +61568,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!223 &1833457249
 Canvas:
   m_ObjectHideFlags: 0

@@ -66,6 +66,8 @@ public class Player : MonoBehaviour {
 	public float maxDragTime;
 	public float dragDistance;
 	public float swipeSensitivity;
+
+    public Transform opponent2; 
 	
 	bool showBar;
 	
