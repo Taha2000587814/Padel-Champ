@@ -5420,7 +5420,7 @@ MonoBehaviour:
   hitAudio: {fileID: 3609163562095006507}
   randomPitch: {fileID: 3609163562095006506}
   notRotating: 0
-  followBall: 0
+  followBall: 1
 --- !u!54 &3609163562095006510
 Rigidbody:
   m_ObjectHideFlags: 0

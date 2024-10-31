@@ -58,64 +58,61 @@ public class Opponent : MonoBehaviour {
 		pos.x = transform.position.x;
 		servePoint.position = pos;
 	}
-	
-	void Move(){
-		//either move to the target, or directly follow the ball x position
-		if(target == Vector3.zero)
-			return;
-		
-		float dist = Vector3.Distance(transform.position, target);
-		moving = dist > 0.1f;
-		
-		if(moving){
-			if(!followBall || ball == null){
-				transform.position = Vector3.MoveTowards(transform.position, target, Time.deltaTime * speed);
-			}
-			else{
-				Vector3 pos = transform.position;
-				bool move = ball.GetComponent<Ball>().GetLastHit();
-				Vector3 ballTarget = move ? new Vector3(ball.position.x, pos.y, pos.z) : pos;
-				transform.position = Vector3.MoveTowards(transform.position, ballTarget, Time.deltaTime * speed);
-			}
 
-			right = target.x > transform.position.x;
-		}
-		
-		if(anim.GetBool("Right") != right)
-			anim.SetBool("Right", right);
-		
-		if(!moving){
-			rotation = 0;
-			
-			if(moveParticles.isPlaying)
-				moveParticles.Stop();
-		}
-		else{
-			if(right){
-				rotation = 91;
-			}
-			else{
-				rotation = -90;
-			}
-			
-			if(!moveParticles.isPlaying)
-				moveParticles.Play();
-		}
-		
-		//update the animator value to display the correct animation
-		anim.SetBool("Moving", moving);
-		
-		if(notRotating)
-			return;
-		
-		//rotate character based on movement
-		Vector3 rot = transform.eulerAngles;
-		rot.y = rotation;
-		
-		transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(rot), Time.deltaTime * turnSpeed);
-	}
-	
-	void OnTriggerEnter(Collider other){
+    void Move()
+    {
+        // Ensure that the target is not null
+        if (target == Vector3.zero) return;
+
+        // Calculate the distance to the target
+        float dist = Vector3.Distance(transform.position, target);
+        moving = dist > 0.1f;
+
+        if (moving)
+        {
+            if (!followBall || ball == null)
+            {
+                // Move towards the target position in all directions
+                transform.position = Vector3.MoveTowards(transform.position, target, Time.deltaTime * speed);
+            }
+            else
+            {
+                // Follow the ball's position
+                Vector3 pos = transform.position;
+                bool move = ball.GetComponent<Ball>().GetLastHit();
+                Vector3 ballTarget = move ? new Vector3(ball.position.x, ball.position.y, pos.z) : pos;
+                transform.position = Vector3.MoveTowards(transform.position, ballTarget, Time.deltaTime * speed);
+            }
+            right = target.x > transform.position.x;
+        }
+
+        // Update animation state
+        if (anim.GetBool("Right") != right) anim.SetBool("Right", right);
+        if (!moving)
+        {
+            rotation = 0;
+            if (moveParticles.isPlaying) moveParticles.Stop();
+        }
+        else
+        {
+            rotation = right ? 91 : -90;
+            if (!moveParticles.isPlaying) moveParticles.Play();
+        }
+
+        // Set moving animation state
+        anim.SetBool("Moving", moving);
+
+        // Rotate character based on movement
+        if (!notRotating)
+        {
+            Vector3 rot = transform.eulerAngles;
+            rot.y = rotation;
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(rot), Time.deltaTime * turnSpeed);
+        }
+    }
+
+
+    void OnTriggerEnter(Collider other){
 		//shoot the ball on trigger enter (when ball enters the opponent box)
 		if(!other.gameObject.CompareTag("Ball") || other.gameObject.GetComponent<Ball>().inactive || justHit)
 			return;

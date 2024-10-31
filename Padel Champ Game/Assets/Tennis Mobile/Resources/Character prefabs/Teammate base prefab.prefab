@@ -5597,7 +5597,7 @@ MonoBehaviour:
   hitAudio: {fileID: 3609163562095006507}
   randomPitch: {fileID: 3609163562095006506}
   notRotating: 0
-  followBall: 0
+  followBall: 1
 --- !u!1 &3609163562095006499
 GameObject:
   m_ObjectHideFlags: 0
