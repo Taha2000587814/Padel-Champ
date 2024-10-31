@@ -5345,7 +5345,7 @@ GameObject:
   - component: {fileID: 3609163562095006507}
   - component: {fileID: -9097033287031353185}
   m_Layer: 9
-  m_Name: 'Teammate base prefab '
+  m_Name: Teammate base prefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5581,21 +5581,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1dcecf778ef6d94ea2911bab994693f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0
-  turnSpeed: 0
-  anim: {fileID: 0}
-  head: {fileID: 0}
+  speed: 6.5
+  turnSpeed: 6
+  anim: {fileID: 3609163562085621909}
+  head: {fileID: 3609163562094907205}
   lookAt: {fileID: 0}
-  moveParticles: {fileID: 0}
+  moveParticles: {fileID: 3609163561518604184}
   ball: {fileID: 0}
-  arrow: {fileID: 0}
-  force: 0
-  upForce: 0
+  arrow: {fileID: 3609163562158081398}
+  force: 9
+  upForce: 8
   player: {fileID: 0}
-  moveRange: 0
-  servePoint: {fileID: 0}
-  hitAudio: {fileID: 0}
-  randomPitch: {fileID: 0}
+  moveRange: 4.3
+  servePoint: {fileID: 3609163562779950125}
+  hitAudio: {fileID: 3609163562095006507}
+  randomPitch: {fileID: 3609163562095006506}
   notRotating: 0
   followBall: 0
 --- !u!1 &3609163562095006499
