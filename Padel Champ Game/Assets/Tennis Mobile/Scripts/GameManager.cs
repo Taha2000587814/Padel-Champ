@@ -126,6 +126,7 @@ public class GameManager : MonoBehaviour
         GameObject newBall = Instantiate(ball, spawnPos.position, ball.transform.rotation);
         player.ball = newBall.transform;
         opponent.ball = newBall.transform;
+        teammate.ball = newBall.transform; 
         ballScript = newBall.GetComponent<Ball>();
     }
 
