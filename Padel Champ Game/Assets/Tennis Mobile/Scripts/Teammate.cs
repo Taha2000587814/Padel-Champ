@@ -27,7 +27,6 @@ public class Teammate : MonoBehaviour
     private bool right;
     private bool moving;
     private bool justHit;
-    private float lastDist;
     private Vector3 serveStart;
     private float rotation;
 
@@ -53,8 +52,10 @@ public class Teammate : MonoBehaviour
     void Move()
     {
         if (target == Vector3.zero) return;
+
         float dist = Vector3.Distance(transform.position, target);
         moving = dist > 0.1f;
+
         if (moving)
         {
             if (!followBall || ball == null)
@@ -65,11 +66,12 @@ public class Teammate : MonoBehaviour
             {
                 Vector3 pos = transform.position;
                 bool move = ball.GetComponent<Ball>().GetLastHit();
-                Vector3 ballTarget = move ? new Vector3(ball.position.x, pos.y, pos.z) : pos;
+                Vector3 ballTarget = move ? new Vector3(ball.position.x, ball.position.y, pos.z) : pos;
                 transform.position = Vector3.MoveTowards(transform.position, ballTarget, Time.deltaTime * speed);
             }
             right = target.x > transform.position.x;
         }
+
         if (anim.GetBool("Right") != right) anim.SetBool("Right", right);
         if (!moving)
         {
@@ -81,7 +83,9 @@ public class Teammate : MonoBehaviour
             rotation = right ? 91 : -90;
             if (!moveParticles.isPlaying) moveParticles.Play();
         }
+
         anim.SetBool("Moving", moving);
+
         if (!notRotating)
         {
             Vector3 rot = transform.eulerAngles;
@@ -93,12 +97,14 @@ public class Teammate : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         if (!other.gameObject.CompareTag("Ball") || other.gameObject.GetComponent<Ball>().inactive || justHit) return;
+
         float xDistance = Mathf.Abs(transform.position.x - other.gameObject.transform.position.x);
         if (xDistance > 1.3f)
         {
             if (Random.Range(0, 2) == 0) anim.SetTrigger("Hit right");
             return;
         }
+
         StartCoroutine(JustHit());
         anim.SetTrigger("Hit right");
         HitBall(false, null);

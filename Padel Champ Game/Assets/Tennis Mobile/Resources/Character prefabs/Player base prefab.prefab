@@ -6939,11 +6939,12 @@ MonoBehaviour:
   head: {fileID: 4407092386578189233}
   lookAt: {fileID: 0}
   moveParticles: {fileID: 4407092386765330157}
-  ball: {fileID: 0}
+  ball: {fileID: 3579686740453311081, guid: 7bb80ce60ca70b24ea2b2f89af7cd46c, type: 3}
   indicator: {fileID: 4407092386981371653}
   rangeCircle: {fileID: 4407092388306529312}
   indicatorFill: {fileID: 4407092386722721435}
-  opponent: {fileID: 0}
+  opponent: {fileID: 3609163562094907201, guid: d4d4a146418288a4ab1f1579e7403645,
+    type: 3}
   ballPosition: {fileID: 4407092388182477923}
   comboLabel: {fileID: 0}
   comboNumberLabel: {fileID: 0}

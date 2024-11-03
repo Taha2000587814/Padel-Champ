@@ -5408,19 +5408,19 @@ MonoBehaviour:
   turnSpeed: 6
   anim: {fileID: 3609163562085621909}
   head: {fileID: 3609163562094907205}
-  lookAt: {fileID: 0}
+  lookAt: {fileID: 3609163562094907201, guid: 7e5307a83c0ce3747a9cfa949daa00a9, type: 3}
   moveParticles: {fileID: 3609163561518604184}
   ball: {fileID: 0}
   arrow: {fileID: 3609163562158081398}
   force: 9.7
   upForce: 8.5
-  player: {fileID: 0}
+  player: {fileID: 4407092387854475606, guid: fd7fa2a8795cd314d8589b18bd4c1d97, type: 3}
   moveRange: 4.3
   servePoint: {fileID: 3609163562779950125}
   hitAudio: {fileID: 3609163562095006507}
   randomPitch: {fileID: 3609163562095006506}
   notRotating: 0
-  followBall: 1
+  followBall: 0
 --- !u!54 &3609163562095006510
 Rigidbody:
   m_ObjectHideFlags: 0

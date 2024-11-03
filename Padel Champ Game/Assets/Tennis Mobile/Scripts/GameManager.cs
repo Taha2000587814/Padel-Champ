@@ -168,7 +168,14 @@ public class GameManager : MonoBehaviour
 
     void LosePoint()
     {
-        opponentPoints += 15; // Increase opponent points by 15
+        if (opponentPoints < 30)
+        {
+            opponentPoints += 15;
+        }
+        else
+        {
+            opponentPoints += 10;
+        }
         if (!resetting)
         {
             StartCoroutine(CheckAndReset(false));
@@ -177,12 +184,20 @@ public class GameManager : MonoBehaviour
 
     void WinPoint()
     {
-        playerPoints += 15; // Increase player points by 15
+        if (playerPoints < 30)
+        {
+            playerPoints += 15;
+        }
+        else
+        {
+            playerPoints += 10;
+        }
         if (!resetting)
         {
             StartCoroutine(CheckAndReset(true));
         }
     }
+
 
 
     IEnumerator CheckAndReset(bool wonPoint)
