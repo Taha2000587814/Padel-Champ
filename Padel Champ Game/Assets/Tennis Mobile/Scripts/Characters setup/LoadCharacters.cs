@@ -7,8 +7,8 @@ public class LoadCharacters : MonoBehaviour
 {
     public Transform playerPosition;
     public Transform opponentPosition;
-    public Transform teammatePosition; // New
-    public Transform opponent2Position; // New
+    public Transform teammatePosition;
+    public Transform opponent2Position;
     public Animator comboLabel;
     public Text comboNumberLabel;
     public Animator swipeLabel;
@@ -22,15 +22,15 @@ public class LoadCharacters : MonoBehaviour
 
     GameObject playerPrefab;
     GameObject opponentPrefab;
-    GameObject teammatePrefab; // New
-    GameObject opponent2Prefab; // New
+    GameObject teammatePrefab;
+    GameObject opponent2Prefab;
 
     void Awake()
     {
         playerPrefab = Resources.Load<GameObject>("Character prefabs/Player base prefab");
         opponentPrefab = Resources.Load<GameObject>("Character prefabs/Opponent base prefab");
-        teammatePrefab = Resources.Load<GameObject>("Character prefabs/Teammate base prefab"); // New
-        opponent2Prefab = Resources.Load<GameObject>("Character prefabs/Opponent2 base prefab"); // New
+        teammatePrefab = Resources.Load<GameObject>("Character prefabs/Teammate base prefab");
+        opponent2Prefab = Resources.Load<GameObject>("Character prefabs/Opponent2 base prefab");
 
         if (playerPrefab == null || opponentPrefab == null || teammatePrefab == null || opponent2Prefab == null)
         {
@@ -52,17 +52,20 @@ public class LoadCharacters : MonoBehaviour
                 opponent.lookAt = newPlayer.transform;
                 player.opponent = opponent.transform;
 
-                GameObject newTeammate = Instantiate(teammatePrefab, teammatePosition.position, teammatePosition.rotation); // New
-                Teammate teammate = newTeammate.GetComponent<Teammate>(); // Assuming you have a Teammate class
-                manager.teammate = teammate; // Assuming you have a teammate field in your GameManager
+                GameObject newTeammate = Instantiate(teammatePrefab, teammatePosition.position, teammatePosition.rotation);
+                Teammate teammate = newTeammate.GetComponent<Teammate>();
+                manager.teammate = teammate;
                 teammate.player = newPlayer.transform;
+                teammate.lookAt = newOpponent.transform; // Teammate looks at the opponent
+                teammate.followBall = true;
+                teammate.randomPitch = teammate.GetComponent<RandomPitch>();
 
-                GameObject newOpponent2 = Instantiate(opponent2Prefab, opponent2Position.position, opponent2Position.rotation); // New
+                GameObject newOpponent2 = Instantiate(opponent2Prefab, opponent2Position.position, opponent2Position.rotation);
                 Opponent opponent2 = newOpponent2.GetComponent<Opponent>();
-                manager.opponent2 = opponent2; // Assuming you have an opponent2 field in your GameManager
+                manager.opponent2 = opponent2;
                 opponent2.player = newPlayer.transform;
                 opponent2.lookAt = newPlayer.transform;
-                player.opponent2 = opponent2.transform; // Assuming player has an opponent2 field
+                player.opponent2 = opponent2.transform;
             }
 
             Opponent op = FindObjectOfType<Opponent>();

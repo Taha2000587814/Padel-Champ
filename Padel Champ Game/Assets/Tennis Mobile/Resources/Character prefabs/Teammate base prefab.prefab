@@ -5585,7 +5585,7 @@ MonoBehaviour:
   turnSpeed: 6
   anim: {fileID: 3609163562085621909}
   head: {fileID: 3609163562094907205}
-  lookAt: {fileID: 0}
+  lookAt: {fileID: 3609163562094907201, guid: d4d4a146418288a4ab1f1579e7403645, type: 3}
   moveParticles: {fileID: 3609163561518604184}
   ball: {fileID: 0}
   arrow: {fileID: 3609163562158081398}
