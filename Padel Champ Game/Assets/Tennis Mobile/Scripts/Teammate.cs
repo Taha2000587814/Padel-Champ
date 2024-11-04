@@ -29,6 +29,8 @@ public class Teammate : MonoBehaviour
     private bool justHit;
     private Vector3 serveStart;
     private float rotation;
+    public float ballRange; // Added ballRange 
+    public Animator rangeCircle; // Added rangeCircle
 
     void Start()
     {
@@ -51,25 +53,27 @@ public class Teammate : MonoBehaviour
 
     void Move()
     {
-        if (target == Vector3.zero) return;
+        // Add a debug log to see when the Move function is called
+        Debug.Log("Move function called.");
+
+        if (target == Vector3.zero)
+        {
+            Debug.Log("Target is zero, returning.");
+            return;
+        }
 
         float dist = Vector3.Distance(transform.position, target);
         moving = dist > 0.1f;
 
         if (moving)
         {
-            if (!followBall || ball == null)
-            {
-                transform.position = Vector3.MoveTowards(transform.position, target, Time.deltaTime * speed);
-            }
-            else
-            {
-                Vector3 pos = transform.position;
-                bool move = ball.GetComponent<Ball>().GetLastHit();
-                Vector3 ballTarget = move ? new Vector3(ball.position.x, ball.position.y, pos.z) : pos;
-                transform.position = Vector3.MoveTowards(transform.position, ballTarget, Time.deltaTime * speed);
-            }
+            Debug.Log("Teammate is moving towards target.");
+            transform.position = Vector3.MoveTowards(transform.position, target, Time.deltaTime * speed);
             right = target.x > transform.position.x;
+        }
+        else
+        {
+            Debug.Log("Teammate is not moving.");
         }
 
         if (anim.GetBool("Right") != right) anim.SetBool("Right", right);
@@ -92,12 +96,43 @@ public class Teammate : MonoBehaviour
             rot.y = rotation;
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(rot), Time.deltaTime * turnSpeed);
         }
+
+        if (ball != null && !ball.GetComponent<Ball>().inactive)
+        {
+            Debug.Log("Checking ball range.");
+            CheckBallRange();
+        }
     }
+
+    void CheckBallRange()
+    {
+        float zDistance = Mathf.Abs(transform.position.z - ball.position.z);
+        if (zDistance < ballRange && !ball.GetComponent<Ball>().inactive)
+        {
+            Debug.Log("Ball is in range.");
+            CanHitBall();
+        }
+    }
+
+    void CanHitBall()
+    {
+        if (!rangeCircle.GetBool("Show"))
+        {
+            rangeCircle.SetBool("Show", true);
+        }
+
+        if (ball != null && ball.GetComponent<Ball>().GetLastHit() && Vector3.Distance(transform.position, ball.position) <= ballRange)
+        {
+            Debug.Log("Teammate can hit the ball.");
+            HitBall(false, null);
+        }
+    }
+
 
     void OnTriggerEnter(Collider other)
     {
         if (!other.gameObject.CompareTag("Ball") || other.gameObject.GetComponent<Ball>().inactive || justHit) return;
-
+        Debug.Log("Trigger Enter");
         float xDistance = Mathf.Abs(transform.position.x - other.gameObject.transform.position.x);
         if (xDistance > 1.3f)
         {
@@ -119,6 +154,7 @@ public class Teammate : MonoBehaviour
     public void HitBall(bool noFlame, Transform spawnPosition)
     {
         randomPitch.Set();
+        Debug.Log("Teammate Player Hitball");
         hitAudio.Play();
         Vector3 random = new Vector3(Random.Range(-moveRange, moveRange), 0, player.position.z);
         Rigidbody rb = ball.GetComponent<Rigidbody>();
@@ -134,6 +170,7 @@ public class Teammate : MonoBehaviour
     public IEnumerator JustHit()
     {
         justHit = true;
+        Debug.Log("Teammate Player Just Hit");
         yield return new WaitForSeconds(1f);
         justHit = false;
     }

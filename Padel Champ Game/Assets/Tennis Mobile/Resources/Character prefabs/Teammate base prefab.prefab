@@ -5587,17 +5587,19 @@ MonoBehaviour:
   head: {fileID: 3609163562094907205}
   lookAt: {fileID: 3609163562094907201, guid: d4d4a146418288a4ab1f1579e7403645, type: 3}
   moveParticles: {fileID: 3609163561518604184}
-  ball: {fileID: 0}
+  ball: {fileID: 3579686740453311081, guid: 7bb80ce60ca70b24ea2b2f89af7cd46c, type: 3}
   arrow: {fileID: 3609163562158081398}
   force: 9
   upForce: 8
   player: {fileID: 4407092387854475606, guid: fd7fa2a8795cd314d8589b18bd4c1d97, type: 3}
-  moveRange: 4.3
+  moveRange: 5
   servePoint: {fileID: 3609163562779950125}
   hitAudio: {fileID: 3609163562095006507}
   randomPitch: {fileID: 3609163562095006506}
   notRotating: 0
   followBall: 1
+  ballRange: 4
+  rangeCircle: {fileID: 0}
 --- !u!1 &3609163562095006499
 GameObject:
   m_ObjectHideFlags: 0
